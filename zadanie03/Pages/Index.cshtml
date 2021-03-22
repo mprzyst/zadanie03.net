@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to FizzBuzz App!</h1>
+    <h2 class="display-8">Enter a number between 0 and 1000:</h2>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Number.Value"> Number:</label>
+            <input asp-for="Number.Value" />
+            <span asp-validation-for="Number.Value" class="text-danger" style ="font-weight: bold"></span>
+        </div>
+        <button type="submit" class="btn-primary">Send</button>
+        <p class="display-4" style="margin-top: 200px">
+        @Model.Number.Result
+        </p>
+
+    </form>
+</div>

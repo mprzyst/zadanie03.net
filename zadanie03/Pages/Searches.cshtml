@@ -1,0 +1,17 @@
+﻿@page
+@model zadanie03.Pages.SearchesModel
+@{
+    ViewData["Title"] = "Recently searched";
+}
+<div class="text-center">
+    <h1 class="display-8">Recently searched number:</h1>
+</div>
+
+@foreach(var x in Model.ListOfSearches)
+@if (x != null)
+{    <div class="text-center" style="margin-top: 70px">
+        <p>@Html.DisplayNameFor(model => x.Value): @x.Value</p>
+        <p>@x.Result</p>
+        <p>@Html.DisplayNameFor(model => x.When): @x.When</p>
+     </div>
+}
