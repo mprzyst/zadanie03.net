@@ -8,36 +8,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using zadanie03.Models;
-
+using zadanie03.Data;
 
 namespace zadanie03.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private readonly NumContext _context;
 
         [BindProperty(SupportsGet = true)]
         public Num Number { get; set; }
 
-
-        //[BindProperty(SupportsGet = true)]
-        //public string Output { get; set; }
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, NumContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
-
-        }
 
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {   
-                Number.When = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                Number.When = DateTime.Now;
                 Number.Result = "Result: ";
 
                 if (Number.Value % 3 == 0)
@@ -53,6 +47,9 @@ namespace zadanie03.Pages
                     Number.Result = "Your number: " + Number.Value.ToString() + " does not meet the FizzBuzz conditions.";
                 }
 
+                _context.Number.Add(Number);
+
+                _context.SaveChanges();
                 var SessionFizzBuzz = HttpContext.Session.GetString("SessionFizzBuzz");
 
 

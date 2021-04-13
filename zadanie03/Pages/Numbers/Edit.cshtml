@@ -1,0 +1,45 @@
+﻿@page
+@model zadanie03.Pages.Numbers.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Num</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Num.Id" />
+            <div class="form-group">
+                <label asp-for="Num.Value" class="control-label"></label>
+                <input asp-for="Num.Value" class="form-control" />
+                <span asp-validation-for="Num.Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Num.Result" class="control-label"></label>
+                <input asp-for="Num.Result" class="form-control" />
+                <span asp-validation-for="Num.Result" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Num.When" class="control-label"></label>
+                <input asp-for="Num.When" class="form-control" />
+                <span asp-validation-for="Num.When" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
