@@ -35,7 +35,8 @@ namespace zadanie03
                  
 
             });
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +59,7 @@ namespace zadanie03
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
             app.UseSession();
 
             app.UseEndpoints(endpoints =>

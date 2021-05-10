@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using zadanie03.Models;
+using zadanie03.Areas.Identity.Pages.Account;
 using zadanie03.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace zadanie03.Pages
 {
@@ -16,14 +18,18 @@ namespace zadanie03.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly NumContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         [BindProperty(SupportsGet = true)]
         public Num Number { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, NumContext context)
+        public IndexModel(ILogger<IndexModel> logger, NumContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -45,6 +51,11 @@ namespace zadanie03.Pages
                 if(Number.Result == "Result: ")
                 {
                     Number.Result = "Your number: " + Number.Value.ToString() + " does not meet the FizzBuzz conditions.";
+                }
+
+                if (_signInManager.IsSignedIn(User))
+                {
+                    Number.UserID = _userManager.GetUserId(User);
                 }
 
                 _context.Number.Add(Number);

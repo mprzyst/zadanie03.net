@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ using zadanie03.Data;
 using zadanie03.Models;
 
 namespace zadanie03.Pages.Numbers
-{
+{   
     public class IndexModel : PageModel
     {
         private readonly zadanie03.Data.NumContext _context;
@@ -26,7 +27,7 @@ namespace zadanie03.Pages.Numbers
             
 
             var NumQuery = from num in _context.Number orderby num.When descending select num ;
-            Num = NumQuery.Take(10).ToList();
+            Num = NumQuery.Take(20).ToList();
         }
     }
 }

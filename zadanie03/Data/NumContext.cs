@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using zadanie03.Models;
 
 namespace zadanie03.Data
 {
-    public class NumContext : DbContext
+    public class NumContext : IdentityDbContext<IdentityUser>
     {
         public NumContext(DbContextOptions options) : base(options) { }
 

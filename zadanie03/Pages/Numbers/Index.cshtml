@@ -1,11 +1,14 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+@inject UserManager<IdentityUser> userManager;
 @model zadanie03.Pages.Numbers.IndexModel
 
 @{
     ViewData["Title"] = "Recently Searched";
 }
 
-<h1>Index</h1>
+<h1>FizzBuzz recently searches</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -26,23 +29,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Num) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Value)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Result)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.When)
-            </td>
-            <td>
-                
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Num)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.When)
+                </td>
+                <td>
+
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    @if (signInManager.IsSignedIn(User) && item.UserID == userManager.GetUserId(User))
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

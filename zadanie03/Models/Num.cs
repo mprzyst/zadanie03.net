@@ -20,5 +20,8 @@ namespace zadanie03.Models
 
         [Column(TypeName = "datetime")]
         public DateTime When { get; set; }
+
+        [Column(TypeName = "varchar(100)")]
+        public string UserID { get; set; }
     }
 }

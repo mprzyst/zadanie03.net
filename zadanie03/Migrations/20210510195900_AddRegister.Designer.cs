@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using zadanie03.Data;
 
 namespace zadanie03.Migrations
 {
     [DbContext(typeof(NumContext))]
-    partial class NumContextModelSnapshot : ModelSnapshot
+    [Migration("20210510195900_AddRegister")]
+    partial class AddRegister
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,9 +230,6 @@ namespace zadanie03.Migrations
 
                     b.Property<string>("Result")
                         .HasColumnType("varchar(80)");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("varchar(100)");
 
                     b.Property<int?>("Value")
                         .IsRequired()
